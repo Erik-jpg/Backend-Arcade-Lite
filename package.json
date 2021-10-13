@@ -1,0 +1,25 @@
+{
+  "name": "backend-arcade-lite",
+  "version": "1.0.0",
+  "description": "This repo is for the backend for Project 3 of U of O BCS. This is a group project and other members will be able to submit and even fork their own repo after presentation. The technologies involved are: MongoDB, Mongoose, Apollo-server, and GraphQL",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Erik-jpg/Backend-Arcade-Lite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Erik-jpg/Backend-Arcade-Lite/issues"
+  },
+  "homepage": "https://github.com/Erik-jpg/Backend-Arcade-Lite#readme",
+  "dependencies": {
+    "@apollo/client": "^3.4.16",
+    "mongoose": "^6.0.10"
+  }
+}
