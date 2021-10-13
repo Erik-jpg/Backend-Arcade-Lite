@@ -54,3 +54,7 @@ app();
 
 // const server = new ApolloServer({ typeDefs, resolvers });
 
+// adding this so that I can attempt to push to main and actually 
+// have something to merge my branch with because git push stops me,
+// ErikBranch has no upstream branch. seesh. 
+// all the files I have made are in a backup incase this gets removed, please no.
