@@ -1,12 +1,12 @@
 const { Schema, model } = require('mongoose');
 
 const scoreSchema = new Schema({
-    usernameBody: {
+    username: {
         type: String,
         required: true,
         // no unique and no trim?
     },
-    scorePoints: {
+    score: {
         type: Number,
         required: true,
     }

@@ -1,28 +1,32 @@
-const db = require('../config/connection');
-const  client = new MongoClient('mongodb://localhost:27017');
-const { MongoClient } = require('mongodb');
+const db = require("../config/connection");
+const { Score } = require("../models");
 
-const { Score } = require('../models');
+db.once("open", async () => {
+  try {
+    await Score.deleteMany();
+    const scores = await Score.insertMany([
+      {
+        username: "AKN",
+        score: 999999,
+      },
+      {
+        username: "MAC",
+        score: 999999,
+      },
+      {
+        username: "KLN",
+        score: 999999,
+      },
+      {
+        username: "RYN",
+        score: 999999,
+      },
+    ]);
 
-const scoreData = require('./score.json');
+    console.log("Scores seeded!");
+  } catch (err) {
+    console.log(err);
+  }
 
-const Score = [
-    {
-        username: '',
-        body: '',
-    },
-];
-
-const seed = async () => {
-    const connection = await client.connect().catch(console.error);
-    const Score = connection.db('userScore').collection('score');
-    await Score.deleteMany({}).then(console.log);
-    await Score.insertMany({}).then(console.log);
-    connection.close();
-}
-seed();
-
-module.exports = { 
-    Score,
-    scoreData
-};
+  process.exit();
+});
