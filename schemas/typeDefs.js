@@ -2,12 +2,24 @@ const { gql } = require('apollo-server');
 
 
 const typeDefs = gql`
+type username {
+    username: String
+}
+
+type Score {
+    getScore: Int
+}
+
 type Query { 
-    getScore: Score
+    username: String
+    getScore: Int
 }
 
 type Mutation {
-    addNewScore(userName: String!, points: Int): Score
+    newScore:
+        newUser: username: String! : Score
+        newScore: points: Int : Score
+        
 }
 `;
 
