@@ -11,7 +11,9 @@ const resolvers = {
   Mutation: {
     addScore: async (parent, args, context) => {
       try {
-        let result = await Score.create({ ...args });
+        let result = await context.db
+          .collection("scores")
+          .insertOne({ ...args });
         return { result, _id: result.insetId };
       } catch (error) {
         return "Error is", error.message;

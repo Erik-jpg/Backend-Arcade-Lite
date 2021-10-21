@@ -11,11 +11,8 @@ type Query {
     scores: [Score]
 }
 
-mutation Mutation($username: String!, $score: Int!) {
-  addScore(username: $username, score: $score) {
-    username
-    score
-  }
+type Mutation {
+    addScore(username:String!, score:Int!): Score  
 }
 `;
 
