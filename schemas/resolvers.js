@@ -9,15 +9,19 @@ const resolvers = {
     }
   },
   Mutation: {
-    addScore: async (parent, args, context) => {
-      try {
-        let result = await context.db
-          .collection("scores")
-          .insertOne({ ...args });
-        return { result, _id: result.insetId };
-      } catch (error) {
-        return "Error is", error.message;
-      }
+    addScore: async (parent, args) => {
+      await connection;
+      const dBScores = await Score.find({}).catch(console.error);
+      dBScores.forEach((rank, i) => {
+        if(args.score > rank.score){
+          dBScores.splice(i, 0, {...args});
+          dBScores.pop();
+          return;
+        }
+      });
+      await Score.deleteMany({});
+      await Score.insertMany(dBScores);
+      return {...args};
     },
   },
 };
