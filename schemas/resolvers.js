@@ -9,15 +9,20 @@ const resolvers = {
     }
   },
   Mutation: {
-    addScore: async (parent, args, context) => {
-      try {
-        let result = await context.db
-          .collection("scores")
-          .insertOne({ ...args });
-        return { result, _id: result.insetId };
-      } catch (error) {
-        return "Error is", error.message;
+    addScore: async (parent, args) => {
+      await connection;
+      const dBScores = await Score.find({}).catch(console.error);
+      let scoreInserted = false;
+      for(let i = 0; i < dBScores.length; i++){
+        if(args.score > dBScores[i].score && !scoreInserted){
+          dBScores.splice(i, 0, {...args});
+          dBScores.pop();
+          scoreInserted = !scoreInserted;
+        }
       }
+      await Score.deleteMany({});
+      await Score.insertMany(dBScores);
+      return {...args};
     },
   },
 };

@@ -1,7 +1,8 @@
-const db = require("../config/connection");
+const connection = require("../config/connection");
 const { Score } = require("../models");
 
-db.once("open", async () => {
+const seed = async() => {
+  await connection;
   try {
     await Score.deleteMany();
     const scores = await Score.insertMany([
@@ -21,6 +22,26 @@ db.once("open", async () => {
         username: "RYN",
         score: 999999,
       },
+      {
+        username: "ONE",
+        score: 0,
+      },
+      {
+        username: "TWO",
+        score: 0,
+      },
+      {
+        username: "THR",
+        score: 0
+      },
+      {
+        username: "FOR",
+        score: 0
+      },
+      {
+        username: "FIV",
+        score: 0
+      }
     ]);
 
     console.log("Scores seeded!");
@@ -29,4 +50,6 @@ db.once("open", async () => {
   }
 
   process.exit();
-});
+}
+
+seed();
