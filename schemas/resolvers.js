@@ -12,13 +12,14 @@ const resolvers = {
     addScore: async (parent, args) => {
       await connection;
       const dBScores = await Score.find({}).catch(console.error);
-      dBScores.forEach((rank, i) => {
-        if(args.score > rank.score){
+      let scoreInserted = false;
+      for(let i = 0; i < dBScores.length; i++){
+        if(args.score > dBScores[i].score && !scoreInserted){
           dBScores.splice(i, 0, {...args});
           dBScores.pop();
-          return;
+          scoreInserted = !scoreInserted;
         }
-      });
+      }
       await Score.deleteMany({});
       await Score.insertMany(dBScores);
       return {...args};
