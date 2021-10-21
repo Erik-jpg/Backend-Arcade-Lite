@@ -1,7 +1,12 @@
+const Score = require("../models/score");
+const connection = require('../config/connection');
+
 const resolvers = {
   Query: {
-    scores: async (parent, args, context) =>
-      context.db.collection("score").find({}).toArray(),
+    scores: async () =>{
+      await connection;
+      return await Score.find({});
+    }
   },
   Mutation: {
     addScore: async (parent, args, context) => {
